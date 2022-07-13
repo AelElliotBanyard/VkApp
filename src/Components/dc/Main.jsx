@@ -20,11 +20,11 @@ function Main(props) {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<MainPage/>}/>
-                <Route path="/open" element={<Open/>}/>
-                <Route path="/person" element={<Person username={props.username}/>}/>
-                <Route path="/mine" element={<Mine username={props.username}/>}/> 
-                <Route path="/*" element={<MainPage/>}/>
+                <Route path="/VkApp/" element={<MainPage/>}/>
+                <Route path="/VkApp/open" element={<Open/>}/>
+                <Route path="/VkApp/person" element={<Person username={props.username}/>}/>
+                <Route path="/VkApp/mine" element={<Mine username={props.username}/>}/> 
+                <Route path="/VkApp/*" element={<MainPage/>}/>
             </Routes>
         </BrowserRouter>
     )
