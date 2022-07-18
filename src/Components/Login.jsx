@@ -2,13 +2,13 @@ import { useRef, useState } from "react";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from "../firebase.config";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import VKMain from './vk/Main'
-import GFMain from './gf/Main'
-import ZFMain from './zf/Main'
-import DCMain from './dc/Main'
-import VKLMain from './vkl/Main'
-import VMain from './v/Main'
-import FMain from './f/Main'
+import VKMain from './ranks/vk/Main'
+import GFMain from './ranks/gf/Main'
+import ZFMain from './ranks/zf/Main'
+import DCMain from './ranks/dc/Main'
+import VKLMain from './ranks/vkl/Main'
+import VMain from './ranks/v/Main'
+import FMain from './ranks/f/Main'
 
 function Login() {
 
@@ -16,6 +16,7 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [validation, setValidation] = useState(false);
+    const [uid, setUid] = useState("");
     const [rank, setRank] = useState("");
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
@@ -26,6 +27,7 @@ function Login() {
         const email = username + "@vkaw.ch";
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                setUid(userCredential.user.uid);
                 const q = query(collection(db, "users"), where("uid", "==", userCredential.user.uid));
                 getDocs(q)
                     .then((data) => {
@@ -54,32 +56,32 @@ function Login() {
         switch (rank) {
             case "vk":
                 return (
-                    <VKMain username={username}/>
+                    <VKMain username={username} uid={uid} />
                 )
             case "gf":
                 return (
-                    <GFMain username={username} />
+                    <GFMain username={username} uid={uid} />
                 )
 
             case "zf":
                 return (
-                    <ZFMain username={username}/>
+                    <ZFMain username={username} uid={uid} />
                 )
             case "dc":
                 return (
-                    <DCMain username={username}/>
+                    <DCMain username={username} uid={uid} />
                 )
             case "vkl":
                 return (
-                    <VKLMain username={username}/>
+                    <VKLMain username={username} uid={uid} />
                 )
             case "v":
                 return (
-                    <VMain username={username}/>
+                    <VMain username={username} uid={uid} />
                 )
             case "f":
                 return (
-                    <FMain username={username} />
+                    <FMain username={username} uid={uid} />
                 )
             default:
                 break;

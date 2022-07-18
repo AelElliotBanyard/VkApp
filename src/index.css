@@ -48,4 +48,16 @@
     .form-off {
         @apply transition transform translate-x-full
     }
+
+    .collapsible {
+        @apply pl-8 bg-orange-500 rounded-b-md
+    }
+
+    .off {
+        @apply hidden
+    }
+
+    .on {
+        @apply block
+    }
 }
